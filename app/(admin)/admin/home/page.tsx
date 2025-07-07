@@ -327,7 +327,7 @@ const CreateEvent = ({ token }: { token: string }) => {
   );
 };
 
-interface AdminEventDetailsProps {
+export interface AdminEventDetailsProps {
   seatLeft: number;
   seatRegistered: number;
   percentage: number;

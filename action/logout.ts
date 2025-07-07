@@ -6,4 +6,5 @@ export async function logOut() {
     const cookieStore = await cookies();
     cookieStore.delete('token');
     revalidatePath('/')
+    revalidatePath('/events')
 }

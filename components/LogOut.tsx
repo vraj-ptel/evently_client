@@ -5,10 +5,11 @@ import { logOut } from "@/action/logout"
 import { Button } from "./ui/button";
 import { LogOutIcon } from "lucide-react"
 
-const LogOut = () => {
+const LogOut = ({setToken}:{setToken:React.Dispatch<React.SetStateAction<string>>}) => {
     const logoutHandler=async()=>{
         console.log('log out')
       await logOut()
+      setToken('')
     }
   return (
     <>

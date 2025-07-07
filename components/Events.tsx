@@ -1,22 +1,26 @@
 "use client";
+import { AdminEventDetailsProps } from "@/app/(admin)/admin/home/page";
 import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
 } from "@/components/ui/dialog";
-import { Event } from "@/types";
 import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import EventCard from "./EventCard";
+import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-const Events = ({ event ,isLoggedIn}: { event: Event,isLoggedIn:boolean }) => {
+
+
+
+const Events = ({ event ,isLoggedIn}: { event: AdminEventDetailsProps,isLoggedIn:boolean }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +57,7 @@ const Events = ({ event ,isLoggedIn}: { event: Event,isLoggedIn:boolean }) => {
         }
       );
       const data = await res.json();
-      console.log("event register data", data);
+      // console.log("event register data", data);
       if (!data.success) {
         toast.error(data.message, {
           description:
@@ -76,6 +80,8 @@ const Events = ({ event ,isLoggedIn}: { event: Event,isLoggedIn:boolean }) => {
 
   return (
     <EventCard event={event}>
+      <div className="flex flex-row gap-2"><Badge>Total Slots: {event.eventCapacity }</Badge>
+      <Badge>Slots Left :{event.seatLeft}</Badge></div>
       {isLoggedIn&&(<Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
           <Button

@@ -13,18 +13,16 @@ export interface BookedEvent {
 const MyEvents = () => {
   const [bookedEvents, setBookedEvents] = useState([]);
    const [token,setToken] =useState('') 
-   useEffect(()=>{
-      const t=document.cookie.split(';').find(cookie=>cookie.trim().startsWith('token'))?.split('=')[1];
-      if(t)setToken(t);
-   },[])
    
-  const fetchBookedEvents = async () => {
+   
+  const fetchBookedEvents = async (t?:string|undefined) => {
+    const cookie=t||token
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/event/booked`,
         {
           method: "GET",
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${cookie}` },
         }
       );
       const result = await res.json();
@@ -36,9 +34,13 @@ const MyEvents = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    fetchBookedEvents();
-  }, []);
+  
+  useEffect(()=>{
+      const t=document.cookie.split(';').find(cookie=>cookie.trim().startsWith('token'))?.split('=')[1];
+      
+      if(t)setToken(t);
+      fetchBookedEvents(t);
+   },[])
 
   const handleUnregister = (eventId: string) => {
     const unregisterEvent = bookedEvents.filter(

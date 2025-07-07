@@ -1,21 +1,42 @@
-
+"use client"
 import { Calendar, User2Icon, UserLockIcon } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import LogOut from "./LogOut";
 import { Button } from "./ui/button";
 import { Separator } from "./ui/separator";
-import { cookies } from "next/headers";
-import LogOut from "./LogOut";
 
-const Header = async() => {
-    const cookieStore = await cookies();
-  const userDetails = await fetch(
+const Header = () => {
+  const [isLoggedUser,setIsLoggedUser]=useState(false)
+  const [token,setToken] =useState('') 
+ 
+  const validateUser=async(t:string|undefined)=>{
+     const userDetail=await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/user/verify`,
       {
         method: "GET",
-        headers: { Authorization: `Bearer ${cookieStore.get("token")?.value}` },
+        headers: { Authorization: `Bearer ${t}` },
       }
     )
-      const isLoggedUser = await userDetails.json();
+    const result=await userDetail.json()
+    console.log('result',result)
+    setIsLoggedUser(result.success)
+  }
+   useEffect(()=>{
+        const t=document.cookie.split(';').find(cookie=>cookie.trim().startsWith('token'))?.split('=')[1];
+        if(t)setToken(t);
+        validateUser(t)
+     },[token])
+     
+  //   const cookieStore = await cookies();
+  // const userDetails = await fetch(
+  //     `${process.env.NEXT_PUBLIC_SERVER_URL}/user/verify`,
+  //     {
+  //       method: "GET",
+  //       headers: { Authorization: `Bearer ${cookieStore.get("token")?.value}` },
+  //     }
+  //   )
+  //     const isLoggedUser = await userDetails.json();
  
   return (
     <div className="backdrop-blur fixed top-0 z-50 bg-background/30 w-full ">
@@ -26,9 +47,9 @@ const Header = async() => {
         <div>
           <div className="flex flex-row  gap-2 ">
           {
-            !isLoggedUser.success &&  <div className="flex flex-row gap-2">
+            !isLoggedUser &&  <div className="flex flex-row gap-2">
               <Link href={'/join'}>
-               <Button className="cursor-pointer" size={'sm'} variant={"outline"}>
+               <Button className="cursor-pointer p-1" size={'sm'} variant={"outline"}>
               <span>
                 <User2Icon />
               </span>
@@ -37,7 +58,7 @@ const Header = async() => {
             
            </Link>
            <Link href={'/admin/verify'}>
-               <Button className="cursor-pointer" size={'sm'} variant={"outline"}>
+               <Button className="cursor-pointer p-1" size={'sm'} variant={"outline"}>
               <span>
                 <UserLockIcon />
               </span>
@@ -48,7 +69,7 @@ const Header = async() => {
             </div>
           }
           {
-            isLoggedUser.success && <div className="flex flex-row gap-1"><Link href={'/events'}>
+            isLoggedUser && <div className="flex flex-row gap-1"><Link href={'/events'}>
             <Button className="cursor-pointer" variant={"outline"}>
             {" "}
             <span>
@@ -58,7 +79,7 @@ const Header = async() => {
           </Button>
           </Link>
          
-            <LogOut/>
+            <LogOut setToken={setToken}/>
           
 
           </div>

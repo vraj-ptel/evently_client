@@ -103,7 +103,7 @@ const AuthPage = () => {
     }
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-md shadow-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20 ">
+      <Card className="w-full max-w-md shadow-lg bg-gradient-to-br  ">
         <CardHeader>
           <CardTitle className="text-center">Welcome, join us to get started</CardTitle>
         </CardHeader>
@@ -123,7 +123,7 @@ const AuthPage = () => {
                      <Label htmlFor="password">Password</Label>
                     <Input type="password" minLength={8} required id="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" />
                 </div>
-                <Button variant={'outline'} disabled={loading}  className="w-full cursor-pointer" type="submit">
+                <Button variant={'ghost'} disabled={loading}  className="w-full cursor-pointer" type="submit">
                   {loading?<span className="flex flex-row gap-2"><Loader className="animate-spin"/> {"loading..."}</span>:"Login"}
                 </Button>
               </form>
@@ -143,7 +143,7 @@ const AuthPage = () => {
                     <Input type="password" value={password} onChange={(e)=>setPassword(e.target.value)}  required id="password" placeholder="Password" />
                 </div>
               
-                <Button variant={'outline'} disabled={loading}  className="w-full cursor-pointer" type="submit">
+                <Button variant={'ghost'} disabled={loading}  className="w-full cursor-pointer" type="submit">
                   {loading?<span className="flex flex-row gap-2"><Loader className="animate-spin"/> {"Registering..."}</span>:"Register"}
                 </Button>
               </form>

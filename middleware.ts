@@ -27,11 +27,7 @@ export async function middleware(req: NextRequest) {
 
   if (pathname.includes("admin")) {
     let authenticatedAdmin = false;
-    // if (!adminToken) {
-    //   const url = req.nextUrl.clone();
-    //   url.pathname = "/admin/verify";
-    //   return NextResponse.redirect(url);
-    // }
+   
     if (adminToken) {
       try {
         const verifiedAdmin = await fetch(
@@ -46,22 +42,7 @@ export async function middleware(req: NextRequest) {
         console.log(error)
       }
     }
-    // if (!adminToken || !authenticatedAdmin) {
-    //   const url = req.nextUrl.clone();
-    //   url.pathname = "/admin/verify";
-    //   return NextResponse.redirect(url);
-    // }
-    // if (authenticatedAdmin && pathname.includes("admin/verify")) {
-    //   const url = req.nextUrl.clone();
-    //   url.pathname = "/admin/home";
-    //   return NextResponse.redirect(url);
-    // }
-
-    // if (pathname.includes("admin/home") && !authenticatedAdmin) {
-    //   const url = req.nextUrl.clone();
-    //   url.pathname = "/admin/verify";
-    //   return NextResponse.redirect(url);
-    // }
+   
 
     if (!authenticatedAdmin && pathname !== "/admin/verify") {
       const url = req.nextUrl.clone();
