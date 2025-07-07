@@ -79,7 +79,7 @@ const Page = async () => {
 
          {
           !isLoggedUser.success && <div className="my-3 z-1 ">
-            <p className="text-foreground/30 text-center mb-10">You are not joined yet please join first to book any event</p>
+            <p className="text-foreground/30 text-2xl text-center mb-10">You are not joined yet please join first to book any event</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               
             </div>

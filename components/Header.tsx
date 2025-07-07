@@ -70,7 +70,7 @@ const Header = () => {
           }
           {
             isLoggedUser && <div className="flex flex-row gap-1"><Link href={'/events'}>
-            <Button className="cursor-pointer" variant={"outline"}>
+            <Button className="cursor-pointer p-1" variant={"outline"}>
             {" "}
             <span>
               <Calendar />

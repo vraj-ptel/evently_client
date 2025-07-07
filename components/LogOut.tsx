@@ -13,7 +13,7 @@ const LogOut = ({setToken}:{setToken:React.Dispatch<React.SetStateAction<string>
     }
   return (
     <>
-        <Button onClick={logoutHandler} variant={'outline'} className="cursor-pointer flex flex-row gap-2"><span><LogOutIcon /></span> Log out</Button>
+        <Button onClick={logoutHandler} variant={'outline'} className="cursor-pointer p-1 flex flex-row gap-2"><span><LogOutIcon /></span> Log out</Button>
     </>
   )
 }
