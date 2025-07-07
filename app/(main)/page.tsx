@@ -70,7 +70,7 @@ const Page = async () => {
         <h1 className="text-3xl font-bold text-center mb-10">
           Upcoming Events
         </h1>
-          {events.length==0 && <h1 className="text-3xl font-bold text-center mb-10">No Events are available at the moment</h1>}
+          {events.length==0 && <h1 className=" text-center mb-10">No Events are available at the moment</h1>}
         <div id="event"  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events?.map((event, index) => {
             return <Events key={index} event={event} isLoggedIn={isLoggedUser.success}/>;
@@ -79,7 +79,7 @@ const Page = async () => {
 
          {
           !isLoggedUser.success && <div className="my-3 z-1 ">
-            <p className="text-3xl font-bold text-center mb-10">You are not joined yet please join first to book any event</p>
+            <p className="text-foreground/30 text-center mb-10">You are not joined yet please join first to book any event</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               
             </div>

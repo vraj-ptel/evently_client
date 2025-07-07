@@ -29,3 +29,8 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
+
+- to set up this project in localhost its required to set up NEXT_PUBLIC_SERVER_URL in .env file .
+- add server url in .env file
+- to login as admin for creating event secret key is required which is "evently"
+- by default user will receive conformation email from tamp121512@gmail.com email address
